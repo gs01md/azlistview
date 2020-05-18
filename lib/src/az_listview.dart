@@ -26,25 +26,26 @@ class _Header extends ISuspensionBean {
 
 /// AzListView.
 class AzListView extends StatefulWidget {
-  AzListView(
-      {Key key,
-      this.data,
-      this.topData,
-      this.itemBuilder,
-      this.controller,
-      this.physics,
-      this.shrinkWrap = true,
-      this.padding = EdgeInsets.zero,
-      this.suspensionWidget,
-      this.isUseRealIndex = true,
-      this.itemHeight = 50,
-      this.suspensionHeight = 40,
-      this.onSusTagChanged,
-      this.header,
-      this.indexBarBuilder,
-      this.indexHintBuilder,
-      this.showIndexHint = true})
-      : assert(itemBuilder != null),
+  AzListView({
+    Key key,
+    this.data,
+    this.topData,
+    this.itemBuilder,
+    this.controller,
+    this.physics,
+    this.shrinkWrap = true,
+    this.padding = EdgeInsets.zero,
+    this.suspensionWidget,
+    this.isUseRealIndex = true,
+    this.itemHeight = 50,
+    this.suspensionHeight = 40,
+    this.onSusTagChanged,
+    this.header,
+    this.indexBarBuilder,
+    this.indexHintBuilder,
+    this.showIndexHint = true,
+    this.showIndex = true,
+  })  : assert(itemBuilder != null),
         super(key: key);
 
   ///with ISuspensionBean Data
@@ -84,7 +85,11 @@ class AzListView extends StatefulWidget {
 
   final IndexHintBuilder indexHintBuilder;
 
+  ///点击时，是否显示弹窗
   final bool showIndexHint;
+
+  ///是否显示右侧索引
+  final bool showIndex;
 
   @override
   State<StatefulWidget> createState() {
@@ -197,7 +202,7 @@ class _AzListViewState extends State<AzListView> {
     }
     children.add(Align(
       alignment: Alignment.centerRight,
-      child: indexBar,
+      child: widget.showIndex ? indexBar : Text(""),
     ));
     Widget indexHint;
     if (widget.indexHintBuilder != null) {
